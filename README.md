@@ -1,2 +1,2 @@
-# projekt_modelowanie_cieplo
+# Projekt_modelowanie_cieplo
 
