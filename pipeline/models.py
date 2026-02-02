@@ -44,3 +44,18 @@ def oblicz_alfa(nazwa_materialu, mnoznik):
     m = dane[nazwa_materialu]
     alfa = m['L'] / (m['R'] * m['C'])
     return alfa * mnoznik
+
+def termostat(u_start, A_inv_on, A_inv_off, T_grzejnika, T_cel, idx_czujnika, kroki):
+    u = u_start.copy()
+    indeksy_grzejnika = (u_start == T_grzejnika)
+    
+    for i in range(kroki):
+        temp_czujnika = u[idx_czujnika]
+        
+        if temp_czujnika < T_cel:
+            u[indeksy_grzejnika] = T_grzejnika
+            u = A_inv_on @ u
+        else:
+            u = A_inv_off @ u
+            
+    return u
