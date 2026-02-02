@@ -1,0 +1,7 @@
+material, lambda, density, c
+beton, 1.7, 2300, 880
+cegla, 0.7, 1600, 840
+styropian, 0.04, 30, 1200
+drewno, 0.16, 600, 2400
+szklo, 1.1, 2500, 840
+powietrze, 0.026, 1.2, 1005
