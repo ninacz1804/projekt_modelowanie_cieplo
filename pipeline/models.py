@@ -30,8 +30,12 @@ def D2(n):
 def macierz_A(nx, ny, alfa, dt, h, maska_brzegow):
     I_2D = np.eye(nx * ny)
     L_2D = (np.kron(np.eye(ny), D2(nx)) + np.kron(D2(ny), np.eye(nx))) / h**2
+
+    if isinstance(alfa, np.ndarray):
+        A = I_2D - dt * (alfa.reshape(-1, 1) * L_2D)
+    else:
+        A = I_2D - alfa * dt * L_2D
     
-    A = I_2D - alfa * dt * L_2D
     for i in range(nx * ny):
         if maska_brzegow[i]:
             A[i, :] = 0
