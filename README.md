@@ -10,7 +10,11 @@ Projekt dotyczy numerycznego rozwiązania równania ciepła w celu analizy efekt
 
 ## Jak uruchomić?
 1. Zainstaluj wymagane biblioteki: `pip install -r requirements.txt`
-2. Otwórz wybrany notatnik w folderze `notebooks`.
+2. Otwórz wybrany notatnik w folderze `notebooks`
+
+## Zaimplementowano:
+- **Problem 1**: Analiza lokalizacji grzejnika (pod oknem vs na przeciwległej ścianie) wraz z działającym termostatem punktowym.
+- **Problem 2**: Symulacja pasożytnictwa cieplnego w układzie trzech pomieszczeń z uwzględnieniem izolacyjności ścian (różne parametry materiałowe dla powietrza i cegły).
 
 ## Autor
 Nina Czajkowska
