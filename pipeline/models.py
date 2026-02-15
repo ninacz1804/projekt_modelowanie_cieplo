@@ -63,3 +63,19 @@ def termostat(u_start, A_inv_on, A_inv_off, T_grzejnika, T_cel, idx_czujnika, kr
             u = A_inv_off @ u
             
     return u
+
+def symulacja_pokoju(x_grz, y_grz, nx, ny, alfa, dt, h, T_start, T_okna, T_grzejnika, T_cel, idx_czujnika, kroki):
+    pokoj = np.ones((ny, nx)) * T_start
+    pokoj[0, 15:35] = T_okna
+    pokoj[y_grz : y_grz + 4, x_grz : x_grz + 10] = T_grzejnika
+    
+    u_vector = pokoj.flatten()
+
+    maska_on = (u_vector == T_okna) | (u_vector == T_grzejnika)
+    A_inv_on = macierz_A(nx, ny, alfa, dt, h, maska_on)
+    maska_off = (u_vector == T_okna)
+    A_inv_off = macierz_A(nx, ny, alfa, dt, h, maska_off)
+
+    u_wynik = termostat(u_vector, A_inv_on, A_inv_off, T_grzejnika, T_cel, idx_czujnika, kroki)
+    
+    return u_wynik.reshape((ny, nx))
