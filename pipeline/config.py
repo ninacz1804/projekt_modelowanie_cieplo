@@ -26,3 +26,9 @@ idx_czujnika_sasiad_1 = czujnik_y_sasiad_1 * nx_3 + czujnik_x_sasiad_1
 czujnik_x_sasiad_2 = 75
 czujnik_y_sasiad_2 = 15
 idx_czujnika_sasiad_2 = czujnik_y_sasiad_2 * nx_3 + czujnik_x_sasiad_2
+
+odleglosci_r = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45]
+lista_sigma = []
+
+szerokosc = 10
+wysokosc = 4
