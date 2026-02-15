@@ -82,12 +82,14 @@ def symulacja_pokoju(x_grz, y_grz, szer_grz, wys_grz, nx, ny, alfa, dt, h, T_sta
 
 
 def symulacja_trzech_pokoi(nx, ny, alfa_wektor, dt, h, T_start, T_grzejnika, T_cel, idx_czujnikow, maski_grzejnikow, kroki, kto_grzeje=[True, True, True]):
-    
+ 
     u = np.ones(nx * ny) * T_start
-    energia = [0.0, 0.0, 0.0] 
-  
+    energia = [0.0, 0.0, 0.0]
+    C = 0.01
     maska_wszystkie_grz = maski_grzejnikow[0] | maski_grzejnikow[1] | maski_grzejnikow[2]
+
     A_inv_on = macierz_A(nx, ny, alfa_wektor, dt, h, maska_wszystkie_grz)
+  
     A_inv_off = macierz_A(nx, ny, alfa_wektor, dt, h, np.zeros(nx * ny, dtype=bool))
 
     for i in range(kroki):
@@ -96,9 +98,12 @@ def symulacja_trzech_pokoi(nx, ny, alfa_wektor, dt, h, T_start, T_grzejnika, T_c
         for p in range(3):
             if kto_grzeje[p] and u[idx_czujnikow[p]] < T_cel:
                 u[maski_grzejnikow[p]] = T_grzejnika
-                energia[p] += np.sum(maski_grzejnikow[p]) * dt
                 czy_ktokolwiek_grzeje = True
-        
+                f_xu = u[maski_grzejnikow[p]] * C
+
+                calka_przestrzenna = np.sum(f_xu) * (h**2)
+                energia[p] += calka_przestrzenna * dt
+
         if czy_ktokolwiek_grzeje:
             u = A_inv_on @ u
         else:
